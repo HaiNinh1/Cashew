@@ -1,9 +1,9 @@
-# 💰 Cashew Nhóm 10 – Ứng dụng Quản lý Chi tiêu
+# Cashew Nhóm 10 – Ứng dụng Quản lý Chi tiêu
 
 > Bài tập nhóm: **Xây dựng Ứng dụng Quản lý Chi tiêu dựa trên mã nguồn Cashew**
 > Fork từ dự án mã nguồn mở [jameskokoska/Cashew](https://github.com/jameskokoska/Cashew) (giấy phép GPL-3.0).
 
-## 👥 Thành viên nhóm & phân công
+## Thành viên nhóm & phân công
 
 | # | Thành viên | MSSV | Vai trò | Phụ trách |
 |---|------------|------|---------|-----------|
@@ -15,7 +15,7 @@
 Trong code, mọi chỗ thay đổi đều được đánh dấu bằng comment `[Nhóm 10 - TVx]` để dễ tra cứu
 (`git grep "Nhóm 10"`).
 
-## ✅ Checklist bài tập
+## Checklist bài tập
 
 - [x] Fork và clone mã nguồn Cashew từ GitHub về máy cá nhân
 - [x] Cài đặt dependencies và cấu hình môi trường
@@ -23,7 +23,7 @@ Trong code, mọi chỗ thay đổi đều được đánh dấu bằng comment 
 - [x] Tùy chỉnh tính năng + giao diện (4 tùy chỉnh, mỗi thành viên 1 mục)
 - [x] Đóng gói sản phẩm ([Tải file APK tại GitHub Releases](https://github.com/HaiNinh1/Cashew/releases/tag/v1.0.0-nhom10)), đẩy lên GitHub kèm ảnh chụp màn hình (`docs/screenshots/`)
 
-## 🛠️ 1. Cài đặt môi trường & chạy ứng dụng
+## 1. Cài đặt môi trường & chạy ứng dụng
 
 Dự án Flutter nằm trong thư mục `budget/`. Mã nguồn gốc được viết cho **Flutter 3.19** (Dart 3.3);
 Flutter mới hơn (≥ 3.22) sẽ lỗi `flutter pub get` do xung đột phiên bản `intl`
@@ -96,7 +96,7 @@ Lỗi hay gặp:
   và xem file `%USERPROFILE%/.gradle/gradle.properties` có dòng `org.gradle.java.home=...` trỏ tới JDK khác không (dòng này ghi đè mọi cài đặt khác).
 - `local.properties` không tồn tại → chạy `flutter pub get` trong `budget/` trước khi mở Android Studio.
 
-## 🎨 2. Các tùy chỉnh của nhóm
+## 2. Các tùy chỉnh của nhóm
 
 ### TV1 – Đổi tên ứng dụng & màu chủ đạo (Ngô Quang Tùng)
 - Tên ứng dụng **"Cashew" → "Cashew Nhóm 10"**: `lib/struct/languageMap.dart` (`globalAppName`), `lib/main.dart`,
@@ -124,7 +124,7 @@ Lỗi hay gặp:
 - Bấm vào ô để mở danh sách giao dịch chi tiêu tương ứng.
 - Bật/tắt và sắp xếp được trong **Chỉnh sửa trang chủ → "Thống kê nhanh"**.
 
-## 🧪 3. Kiểm tra chức năng cơ bản (thêm / sửa / xóa)
+## 3. Kiểm tra chức năng cơ bản (thêm / sửa / xóa)
 
 Đã chạy bản web release trên Chrome và kiểm tra:
 
@@ -136,7 +136,7 @@ Lỗi hay gặp:
 | 4 | Thêm "Ăn trưa" 50.000 ₫ rồi **xóa** | Hộp thoại xác nhận → giao dịch bị xóa, tổng về 45.000 ₫ |
 | 5 | Ẩn banner bằng ✕, bật lại trong Chỉnh sửa trang chủ | Hoạt động đúng |
 
-## 📸 4. Ảnh chụp màn hình
+## 4. Ảnh chụp màn hình
 
 | Onboarding (tên mới) | Onboarding (VND) | Chào mừng |
 |---|---|---|
@@ -158,7 +158,7 @@ Lỗi hay gặp:
 |---|---|---|
 | ![](docs/screenshots/13_chinh_sua_trang_chu.png) | ![](docs/screenshots/14_an_banner.png) | ![](docs/screenshots/15_trang_chu_cuoi.png) |
 
-## ⚠️ Hạn chế đã biết
+## Hạn chế đã biết
 - Các chuỗi mới chỉ được thêm vào `generated/en.json` và `vi.json` (ngôn ngữ khác tự dùng tiếng Anh).
   Nếu chạy lại `generate-translations.py` thì cần thêm lại các khóa này.
 - Khi khôi phục bản sao lưu, Cashew gốc đặt lại ngôn ngữ về "Hệ thống"; nhóm giữ nguyên hành vi này.
