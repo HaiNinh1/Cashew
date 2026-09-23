@@ -59,6 +59,43 @@ Ghi chú:
   Chức năng đăng nhập Google / sao lưu Drive dùng Firebase của tác giả gốc nên không hoạt động trên bản local.
 - Cashew không hỗ trợ Windows desktop (không có thư mục `windows/`), nên chạy bằng Chrome hoặc Android.
 
+### Chạy trên Android Studio (mỗi thành viên làm một lần)
+
+Phần Android dùng Gradle 7.5, chỉ chạy được với **JDK ≤ 18**. Android Studio bản mới đi kèm JDK 21/25
+nên build sẽ lỗi (`Unsupported class file major version ...`). Cả nhóm dùng chung **JDK 17**:
+
+| Công cụ | Phiên bản |
+|---|---|
+| Flutter | 3.19.6 (`C:/src/flutter-3.19.6`) |
+| JDK cho Gradle | 17 |
+| Android SDK | platform 34 |
+| Android Studio | bản bất kỳ, đã cài plugin **Flutter** + **Dart** |
+
+```bash
+# 1. Cài JDK 17 và chỉ cho Flutter dùng nó (thay 17.x.x bằng tên thư mục thật)
+winget install Microsoft.OpenJDK.17
+C:/src/flutter-3.19.6/bin/flutter config --jdk-dir "C:/Program Files/Microsoft/jdk-17.x.x-hotspot"
+
+# 2. Kiểm tra: mục "Android toolchain" phải báo Java 17
+C:/src/flutter-3.19.6/bin/flutter doctor -v
+
+# 3. Tạo android/local.properties + tải thư viện
+cd budget
+C:/src/flutter-3.19.6/bin/flutter pub get
+```
+
+Trong Android Studio:
+1. **File → Open** → chọn thư mục **`budget/`** (không mở thư mục gốc của repo, nếu không Android Studio sẽ không nhận ra dự án Flutter).
+2. **Settings → Languages & Frameworks → Flutter** → Flutter SDK path = `C:/src/flutter-3.19.6`.
+3. **Settings → Build, Execution, Deployment → Build Tools → Gradle → Gradle JDK** = JDK 17 (cần khi mở riêng thư mục `budget/android`).
+4. Bật máy ảo trong **Device Manager** (hoặc cắm điện thoại đã bật USB debugging), chọn `main.dart` → **Run ▶**.
+
+Lỗi hay gặp:
+- `You are applying Flutter's main Gradle plugin imperatively` → đang dùng nhầm Flutter mới; đổi Flutter SDK path về `flutter-3.19.6`.
+- `Unsupported class file major version 65/69` → Gradle đang chạy bằng JDK 21/25. Kiểm tra lại bước `flutter config --jdk-dir`,
+  và xem file `%USERPROFILE%/.gradle/gradle.properties` có dòng `org.gradle.java.home=...` trỏ tới JDK khác không (dòng này ghi đè mọi cài đặt khác).
+- `local.properties` không tồn tại → chạy `flutter pub get` trong `budget/` trước khi mở Android Studio.
+
 ## 🎨 2. Các tùy chỉnh của nhóm
 
 ### TV1 – Đổi tên ứng dụng & màu chủ đạo (Ngô Quang Tùng)
