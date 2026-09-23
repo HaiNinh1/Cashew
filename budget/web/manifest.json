@@ -1,10 +1,10 @@
 {
-    "name": "Cashew",
-    "short_name": "Cashew",
+    "name": "Cashew Nhóm 10",
+    "short_name": "Cashew G10",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#ffffff",
-    "theme_color": "#5f85c2",
+    "theme_color": "#00897b",
     "description": "A budget and financial tracking application designed for you",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,

@@ -1180,5 +1180,15 @@
   "import-warning": "Cảnh báo nhập khẩu",
   "import-warning-description": "Quá trình nhập có thể thất bại! Vui lòng đảm bảo rằng bạn đã chọn tệp sao lưu Cashew [.sqlite] hoặc [.sql] hợp lệ",
   "duplicate-budget-question": "Nhân đôi ngân sách?",
-  "duplicate-budget": "Nhân đôi ngân sách"
+  "duplicate-budget": "Nhân đôi ngân sách",
+  "group-banner-section-name": "Banner chào mừng",
+  "group-banner-title": "Chào mừng bạn đến với {app}!",
+  "group-banner-tip-1": "Mẹo: ghi lại mọi khoản chi ngay khi phát sinh, kể cả khoản nhỏ.",
+  "group-banner-tip-2": "Mẹo: đặt ngân sách hằng tháng và xem lại mỗi cuối tuần.",
+  "group-banner-tip-3": "Mẹo: áp dụng quy tắc 50/30/20 - thiết yếu, mong muốn, tiết kiệm.",
+  "group-banner-tip-4": "Mẹo: rà soát các gói đăng ký và hủy những gói không dùng.",
+  "group-banner-tip-5": "Mẹo: tiết kiệm trước, chi tiêu phần còn lại sau.",
+  "quick-stats": "Thống kê nhanh",
+  "spent-today": "Chi tiêu hôm nay",
+  "spent-this-month": "Chi tiêu tháng này"
 }

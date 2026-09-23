@@ -75,6 +75,28 @@ class _EditHomePageState extends State<EditHomePage> {
     Future.delayed(Duration.zero, () async {
       setState(() {
         editHomePageItems = {
+          // [Nhóm 10 - TV2]
+          "groupBanner": EditHomePageItem(
+            icon: appStateSettings["outlinedIcons"]
+                ? Icons.waving_hand_outlined
+                : Icons.waving_hand_rounded,
+            name: "group-banner-section-name".tr(),
+            isEnabled: isHomeScreenSectionEnabled(context, "showGroupBanner"),
+            onSwitched: (value) {
+              switchHomeScreenSection(context, "showGroupBanner", value);
+            },
+          ),
+          // [Nhóm 10 - TV4]
+          "quickStats": EditHomePageItem(
+            icon: appStateSettings["outlinedIcons"]
+                ? Icons.today_outlined
+                : Icons.today_rounded,
+            name: "quick-stats".tr(),
+            isEnabled: isHomeScreenSectionEnabled(context, "showQuickStats"),
+            onSwitched: (value) {
+              switchHomeScreenSection(context, "showQuickStats", value);
+            },
+          ),
           "wallets": EditHomePageItem(
             icon: appStateSettings["outlinedIcons"]
                 ? Icons.account_balance_wallet_outlined

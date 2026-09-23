@@ -38,14 +38,16 @@ Future<bool> createDefaultCategories() async {
 }
 
 TransactionWallet defaultWallet() {
+  String defaultCurrency = getDevicesDefaultCurrencyCode();
   return TransactionWallet(
     walletPk: "0",
     name: "default-account-name".tr(),
     dateCreated: DateTime.now(),
     order: 0,
-    currency: getDevicesDefaultCurrencyCode(),
+    currency: defaultCurrency,
     dateTimeModified: null,
-    decimals: 2,
+    // [Nhóm 10 - TV3] VND không có số lẻ
+    decimals: getDefaultDecimalsForCurrency(defaultCurrency),
     homePageWidgetDisplay: defaultWalletHomePageWidgetDisplay,
   );
 }

@@ -5,7 +5,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-String globalAppName = "Cashew";
+// [Nhóm 10 - TV1] Đổi tên ứng dụng
+String globalAppName = "Cashew Nhóm 10";
 
 Map<String, dynamic> languageNamesJSON = {};
 loadLanguageNamesJSON() async {
@@ -115,6 +116,8 @@ class InitializeLocalizations extends StatelessWidget {
       path: 'assets/translations/generated',
       useFallbackTranslations: true,
       fallbackLocale: supportedLocales.values.toList().first,
+      // [Nhóm 10 - TV3] Lần đầu mở app sẽ dùng ngôn ngữ trong cài đặt (mặc định: tiếng Việt)
+      startLocale: supportedLocales[appStateSettings["locale"].toString()],
       child: child,
     );
   }

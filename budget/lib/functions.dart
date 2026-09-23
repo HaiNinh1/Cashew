@@ -1187,6 +1187,7 @@ Future<bool> openUrl(String link) async {
 }
 
 List<String> popularCurrencies = [
+  'vnd', // Vietnamese Dong - [Nhóm 10 - TV3] đưa VND lên đầu danh sách
   'usd', // United States Dollar
   'eur', // Euro
   'jpy', // Japanese Yen
@@ -1204,7 +1205,17 @@ List<String> popularCurrencies = [
   'btc', // Bitcoin
 ];
 
+// [Nhóm 10 - TV3] Ứng dụng được tùy chỉnh cho người Việt: luôn mặc định dùng VND
+const bool alwaysDefaultToVND = true;
+
+// [Nhóm 10 - TV3] Các loại tiền không dùng số thập phân (VND, JPY, KRW)
+int getDefaultDecimalsForCurrency(String? currencyKey) {
+  const List<String> zeroDecimalCurrencies = ['vnd', 'jpy', 'krw'];
+  return zeroDecimalCurrencies.contains(currencyKey) ? 0 : 2;
+}
+
 String getDevicesDefaultCurrencyCode() {
+  if (alwaysDefaultToVND) return 'vnd';
   try {
     String? currentCountryCode =
         WidgetsBinding.instance.platformDispatcher.locale.countryCode;

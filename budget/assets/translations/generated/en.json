@@ -1180,5 +1180,15 @@
   "import-warning": "Import Warning",
   "import-warning-description": "Import may fail! Please make sure you have selected a valid Cashew [.sqlite] or [.sql] backup file",
   "duplicate-budget-question": "Duplicate Budget?",
-  "duplicate-budget": "Duplicate Budget"
+  "duplicate-budget": "Duplicate Budget",
+  "group-banner-section-name": "Welcome banner",
+  "group-banner-title": "Welcome to {app}!",
+  "group-banner-tip-1": "Tip: write down every expense right away, even small ones.",
+  "group-banner-tip-2": "Tip: set a monthly budget and check it every weekend.",
+  "group-banner-tip-3": "Tip: follow the 50/30/20 rule - needs, wants, savings.",
+  "group-banner-tip-4": "Tip: review your subscriptions and cancel the ones you don't use.",
+  "group-banner-tip-5": "Tip: save first, then spend what is left.",
+  "quick-stats": "Quick spending stats",
+  "spent-today": "Spent today",
+  "spent-this-month": "Spent this month"
 }

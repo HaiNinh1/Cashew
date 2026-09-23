@@ -377,7 +377,11 @@ class OnBoardingPageBodyState extends State<OnBoardingPageBody> {
                                   popRoute(context);
                                   database.createOrUpdateWallet(
                                       primaryWallet.copyWith(
-                                          currency: Value(selectedCurrency)));
+                                          currency: Value(selectedCurrency),
+                                          // [Nhóm 10 - TV3] Tự chỉnh số lẻ theo loại tiền
+                                          decimals:
+                                              getDefaultDecimalsForCurrency(
+                                                  selectedCurrency)));
                                 },
                                 initialCurrency: primaryWallet.currency,
                                 onHasFocus: () {

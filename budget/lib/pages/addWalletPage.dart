@@ -64,7 +64,9 @@ class _AddWalletPageState extends State<AddWalletPage> {
   String? searchCurrency = "";
   String selectedCurrency =
       getDevicesDefaultCurrencyCode(); //if no currency selected use empty string
-  int selectedDecimals = 2;
+  // [Nhóm 10 - TV3] Số lẻ mặc định theo loại tiền (VND: 0)
+  int selectedDecimals =
+      getDefaultDecimalsForCurrency(getDevicesDefaultCurrencyCode());
   FocusNode _titleFocusNode = FocusNode();
 
   void setSelectedTitle(String title) {
@@ -84,6 +86,9 @@ class _AddWalletPageState extends State<AddWalletPage> {
   void setSelectedCurrency(String currencyKey) {
     setState(() {
       selectedCurrency = currencyKey;
+      // [Nhóm 10 - TV3] Tài khoản mới: tự chỉnh số lẻ theo loại tiền
+      if (widget.wallet == null)
+        selectedDecimals = getDefaultDecimalsForCurrency(currencyKey);
     });
     determineBottomButton();
     return;

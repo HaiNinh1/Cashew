@@ -29,8 +29,9 @@ Future<Map<String, dynamic>> getDefaultPreferences() async {
     "showExtraInfoText": true,
     "selectedWalletPk": "0",
     "selectedSubscriptionType": 0,
-    "accentColor": toHexString(Color(0xFF1B447A)),
-    "accentSystemColor": await systemColorByDefault(),
+    "accentColor": toHexString(Color(0xFF00897B)), // [Nhóm 10 - TV1] Màu chủ đạo xanh ngọc
+    // [Nhóm 10 - TV1] Tắt màu hệ thống mặc định để luôn thấy màu chủ đạo của nhóm
+    "accentSystemColor": false,
     "widgetOpacity": 1,
     "widgetTheme": "system", //system, light, dark
     "nonCompactTransactions":
@@ -72,12 +73,20 @@ Future<Map<String, dynamic>> getDefaultPreferences() async {
     "showUsernameWelcomeBanner": true,
     "showUsernameWelcomeBannerFullScreen": true,
     "enableGreetingMessage": true,
+    // [Nhóm 10 - TV2] Banner chào mừng tiếng Việt trên trang chủ
+    "showGroupBanner": true,
+    "showGroupBannerFullScreen": true,
+    // [Nhóm 10 - TV4] Widget thống kê nhanh chi tiêu hôm nay / tháng này
+    "showQuickStats": true,
+    "showQuickStatsFullScreen": true,
     "homePageOrder": [
+      "groupBanner",
       "wallets",
       "walletsList",
       "budgets",
       "objectives",
       "allSpendingSummary",
+      "quickStats",
       "netWorth",
       "overdueUpcoming",
       "creditDebts",
@@ -88,12 +97,14 @@ Future<Map<String, dynamic>> getDefaultPreferences() async {
       "transactionsList",
     ],
     "homePageOrderFullScreen": [
+      "groupBanner",
       "wallets",
       "walletsList",
       "budgets",
       "ORDER:LEFT",
       "objectives",
       "allSpendingSummary",
+      "quickStats",
       "netWorth",
       "overdueUpcoming",
       "creditDebts",
@@ -190,7 +201,7 @@ Future<Map<String, dynamic>> getDefaultPreferences() async {
     "iOSEmulate": false,
     "iOSAnimatedGoo": false,
     "expandedNavigationSidebar": true,
-    "locale": "System", // the locale code or "System"
+    "locale": "vi", // the locale code or "System" // [Nhóm 10 - TV3] Mặc định tiếng Việt
     "firstDayOfWeek": -1, // -1: Locale/System, 0: Sunday, 1: Monday,
     "disableShadows": false,
     "showBillSplitterShortcut": false,

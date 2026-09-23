@@ -1,3 +1,136 @@
+# 💰 Cashew Nhóm 10 – Ứng dụng Quản lý Chi tiêu
+
+> Bài tập nhóm: **Xây dựng Ứng dụng Quản lý Chi tiêu dựa trên mã nguồn Cashew**
+> Fork từ dự án mã nguồn mở [jameskokoska/Cashew](https://github.com/jameskokoska/Cashew) (giấy phép GPL-3.0).
+
+## 👥 Thành viên nhóm & phân công
+
+| # | Thành viên | MSSV | Phụ trách |
+|---|------------|------|-----------|
+| TV1 | Thành viên 1 | … | Đổi tên ứng dụng + màu chủ đạo (branding) |
+| TV2 | Thành viên 2 | … | Banner chào mừng tiếng Việt trên trang chủ |
+| TV3 | Thành viên 3 | … | Mặc định tiền VND (không số lẻ) + tiếng Việt |
+| TV4 | Thành viên 4 | … | Widget "Thống kê nhanh" chi tiêu hôm nay / tháng này |
+
+Trong code, mọi chỗ thay đổi đều được đánh dấu bằng comment `[Nhóm 10 - TVx]` để dễ tra cứu
+(`git grep "Nhóm 10"`).
+
+## ✅ Checklist bài tập
+
+- [x] Fork và clone mã nguồn Cashew từ GitHub về máy cá nhân
+- [x] Cài đặt dependencies và cấu hình môi trường
+- [x] Chạy ứng dụng trên local và kiểm tra thêm / sửa / xóa chi tiêu
+- [x] Tùy chỉnh tính năng + giao diện (4 tùy chỉnh, mỗi thành viên 1 mục)
+- [x] Đóng gói sản phẩm, đẩy lên GitHub kèm ảnh chụp màn hình (`docs/screenshots/`)
+
+## 🛠️ 1. Cài đặt môi trường & chạy ứng dụng
+
+Dự án Flutter nằm trong thư mục `budget/`. Mã nguồn gốc được viết cho **Flutter 3.19** (Dart 3.3);
+Flutter mới hơn (≥ 3.22) sẽ lỗi `flutter pub get` do xung đột phiên bản `intl`
+(xem [issue #537](https://github.com/jameskokoska/Cashew/issues/537)). Vì vậy nhóm dùng đúng **Flutter 3.19.6**.
+
+```bash
+# 1. Fork repo trên GitHub rồi clone về máy
+git clone https://github.com/HaiNinh1/Cashew.git
+cd Cashew/budget
+
+# 2. Cài Flutter 3.19.6 (có thể cài song song với bản Flutter khác)
+git clone --depth 1 -b 3.19.6 https://github.com/flutter/flutter.git C:/src/flutter-3.19.6
+C:/src/flutter-3.19.6/bin/flutter --version
+
+# 3. Cài dependencies
+C:/src/flutter-3.19.6/bin/flutter pub get
+
+# 4. Chạy trên trình duyệt Chrome (cách dễ nhất, không cần Android)
+C:/src/flutter-3.19.6/bin/flutter run -d chrome
+
+#    hoặc chạy trên máy ảo / điện thoại Android
+C:/src/flutter-3.19.6/bin/flutter run -d <device-id>
+
+# 5. Đóng gói bản web (kết quả ở budget/build/web)
+C:/src/flutter-3.19.6/bin/flutter build web --release
+#    Đóng gói APK Android
+C:/src/flutter-3.19.6/bin/flutter build apk --release
+```
+
+Ghi chú:
+- Không cần chạy `build_runner` vì file `lib/database/tables.g.dart` đã có sẵn (chỉ chạy lại khi sửa bảng database).
+- Ứng dụng lưu dữ liệu cục bộ (SQLite / IndexedDB trên web), dùng được ngay không cần đăng nhập.
+  Chức năng đăng nhập Google / sao lưu Drive dùng Firebase của tác giả gốc nên không hoạt động trên bản local.
+- Cashew không hỗ trợ Windows desktop (không có thư mục `windows/`), nên chạy bằng Chrome hoặc Android.
+
+## 🎨 2. Các tùy chỉnh của nhóm
+
+### TV1 – Đổi tên ứng dụng & màu chủ đạo
+- Tên ứng dụng **"Cashew" → "Cashew Nhóm 10"**: `lib/struct/languageMap.dart` (`globalAppName`), `lib/main.dart`,
+  `web/index.html`, `web/manifest.json`, `android/.../AndroidManifest.xml`, `ios/Runner/Info.plist`.
+- Màu chủ đạo mặc định đổi từ xanh navy `#1B447A` sang **xanh ngọc `#00897B`**
+  (`lib/struct/defaultPreferences.dart`), đồng bộ `theme_color` cho web (`pubspec.yaml`, `manifest.json`).
+- Tắt "màu hệ thống" mặc định để màu của nhóm luôn hiển thị (người dùng vẫn bật lại được trong Cài đặt).
+
+### TV2 – Banner chào mừng tiếng Việt
+- File mới `lib/pages/homePage/homePageGroupBanner.dart`: thẻ nền gradient theo màu chủ đạo, lời chào
+  *"Chào mừng bạn đến với Cashew Nhóm 10!"* và **một mẹo tiết kiệm thay đổi theo ngày** (5 mẹo).
+- Có nút ✕ để ẩn; bật lại trong **Trang chủ → ⋮ → Chỉnh sửa trang chủ → "Banner chào mừng"**.
+- Đăng ký thành một mục trang chủ (`groupBanner`) trong `homePage.dart`, `editHomePage.dart`, `defaultPreferences.dart`.
+- Chuỗi hiển thị được thêm vào `assets/translations/generated/vi.json` và `en.json`.
+
+### TV3 – Mặc định VND & tiếng Việt
+- Tiền tệ mặc định luôn là **VND (₫)** và VND được đưa lên đầu danh sách tiền phổ biến (`lib/functions.dart`).
+- Tài khoản dùng VND/JPY/KRW **không có số lẻ** (`getDefaultDecimalsForCurrency`), áp dụng cho tài khoản mặc định
+  (`initializeDefaultDatabase.dart`), khi đổi tiền tệ lúc onboarding (`onBoardingPage.dart`) và khi tạo tài khoản mới (`addWalletPage.dart`).
+- Ngôn ngữ mặc định là **tiếng Việt** ngay lần mở đầu tiên (`defaultPreferences.dart` + `startLocale` trong `languageMap.dart`).
+
+### TV4 – Widget "Thống kê nhanh"
+- File mới `lib/pages/homePage/homePageQuickStats.dart`: 2 ô **"Chi tiêu hôm nay"** và **"Chi tiêu tháng này"**
+  tính tổng chi (mọi tài khoản) theo thời gian thực bằng `database.watchTotalWithCountOfWallet` + bộ lọc ngày.
+- Bấm vào ô để mở danh sách giao dịch chi tiêu tương ứng.
+- Bật/tắt và sắp xếp được trong **Chỉnh sửa trang chủ → "Thống kê nhanh"**.
+
+## 🧪 3. Kiểm tra chức năng cơ bản (thêm / sửa / xóa)
+
+Đã chạy bản web release trên Chrome và kiểm tra:
+
+| Bước | Thao tác | Kết quả |
+|------|----------|---------|
+| 1 | Mở app lần đầu | Giao diện tiếng Việt, tên "Cashew Nhóm 10", tiền mặc định ₫ |
+| 2 | **Thêm** "Cà phê sáng" 35.000 ₫ (Ăn uống) | Giao dịch xuất hiện; "Chi tiêu hôm nay/tháng này" = 35.000 ₫ |
+| 3 | **Sửa** số tiền thành 45.000 ₫ | Danh sách và tổng cập nhật 45.000 ₫ |
+| 4 | Thêm "Ăn trưa" 50.000 ₫ rồi **xóa** | Hộp thoại xác nhận → giao dịch bị xóa, tổng về 45.000 ₫ |
+| 5 | Ẩn banner bằng ✕, bật lại trong Chỉnh sửa trang chủ | Hoạt động đúng |
+
+## 📸 4. Ảnh chụp màn hình
+
+| Onboarding (tên mới) | Onboarding (VND) | Chào mừng |
+|---|---|---|
+| ![](docs/screenshots/01_onboarding_ten_app.png) | ![](docs/screenshots/02_onboarding_vnd.png) | ![](docs/screenshots/03_onboarding_chao_mung.png) |
+
+| Trang chủ mới (Banner + Thống kê nhanh) | Thêm giao dịch | Trang chủ sau khi thêm |
+|---|---|---|
+| ![](docs/screenshots/04_trang_chu_moi.png) | ![](docs/screenshots/05_them_giao_dich.png) | ![](docs/screenshots/06_trang_chu_sau_khi_them.png) |
+
+| Danh sách sau khi thêm | Sửa giao dịch | Danh sách sau khi sửa |
+|---|---|---|
+| ![](docs/screenshots/07_danh_sach_sau_khi_them.png) | ![](docs/screenshots/08_sua_giao_dich.png) | ![](docs/screenshots/09_danh_sach_sau_khi_sua.png) |
+
+| Hai giao dịch | Xác nhận xóa | Sau khi xóa |
+|---|---|---|
+| ![](docs/screenshots/10_hai_giao_dich.png) | ![](docs/screenshots/11_xac_nhan_xoa.png) | ![](docs/screenshots/12_danh_sach_sau_khi_xoa.png) |
+
+| Chỉnh sửa trang chủ (mục mới) | Ẩn banner | Trang chủ cuối |
+|---|---|---|
+| ![](docs/screenshots/13_chinh_sua_trang_chu.png) | ![](docs/screenshots/14_an_banner.png) | ![](docs/screenshots/15_trang_chu_cuoi.png) |
+
+## ⚠️ Hạn chế đã biết
+- Các chuỗi mới chỉ được thêm vào `generated/en.json` và `vi.json` (ngôn ngữ khác tự dùng tiếng Anh).
+  Nếu chạy lại `generate-translations.py` thì cần thêm lại các khóa này.
+- Khi khôi phục bản sao lưu, Cashew gốc đặt lại ngôn ngữ về "Hệ thống"; nhóm giữ nguyên hành vi này.
+
+---
+
+<details>
+<summary><b>README gốc của Cashew (bấm để xem)</b></summary>
+
 <h1 align="center" style="font-size:28px; line-height:1"><b>Cashew</b></h1>
 
 
@@ -270,3 +403,6 @@ Note: required Firebase.
 ### Long Term Loans
 
 - Long term loans create a goal. However, the goals total is not used. Instead the total of the goal is calculated by totalling the proper polarity of transactions of the opposite type. For example, if it was a loan of 100$ lent out, the initial transaction would be 100$ of negative polarity (expense) and that would be the total of the goal. When a payment is made, it is made in the opposite (positive) polarity (income) and added to the total 'paid back'. We can easily find how much is remaining by taking the difference (or the addition including polarities).
+
+
+</details>

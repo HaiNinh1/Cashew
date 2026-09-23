@@ -14,6 +14,8 @@ import 'package:budget/pages/homePage/homePageUsername.dart';
 import 'package:budget/pages/homePage/homePageBudgets.dart';
 import 'package:budget/pages/homePage/homePageUpcomingTransactions.dart';
 import 'package:budget/pages/homePage/homePageAllSpendingSummary.dart';
+import 'package:budget/pages/homePage/homePageGroupBanner.dart'; // [Nhóm 10 - TV2]
+import 'package:budget/pages/homePage/homePageQuickStats.dart'; // [Nhóm 10 - TV4]
 import 'package:budget/pages/editHomePage.dart';
 import 'package:budget/pages/settingsPage.dart';
 import 'package:budget/pages/homePage/homePageCreditDebts.dart';
@@ -176,6 +178,14 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
             );
 
     Map<String, Widget?> homePageSections = {
+      // [Nhóm 10 - TV2]
+      "groupBanner": isHomeScreenSectionEnabled(context, "showGroupBanner")
+          ? HomePageGroupBanner()
+          : null,
+      // [Nhóm 10 - TV4]
+      "quickStats": isHomeScreenSectionEnabled(context, "showQuickStats")
+          ? HomePageQuickStats()
+          : null,
       "wallets": isHomeScreenSectionEnabled(context, "showWalletSwitcher")
           ? HomePageWalletSwitcher()
           : null,
