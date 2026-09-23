@@ -5,12 +5,12 @@
 
 ## 👥 Thành viên nhóm & phân công
 
-| # | Thành viên | MSSV | Phụ trách |
-|---|------------|------|-----------|
-| TV1 | Thành viên 1 | … | Đổi tên ứng dụng + màu chủ đạo (branding) |
-| TV2 | Thành viên 2 | … | Banner chào mừng tiếng Việt trên trang chủ |
-| TV3 | Thành viên 3 | … | Mặc định tiền VND (không số lẻ) + tiếng Việt |
-| TV4 | Thành viên 4 | … | Widget "Thống kê nhanh" chi tiêu hôm nay / tháng này |
+| # | Thành viên | MSSV | Vai trò | Phụ trách |
+|---|------------|------|---------|-----------|
+| TV1 | **Ngô Quang Tùng** | 2351170631 | Nhóm trưởng | Đổi tên ứng dụng + màu chủ đạo (branding) |
+| TV2 | **Nguyễn Hải Ninh** | 2351170609 | Thành viên | Banner chào mừng tiếng Việt trên trang chủ |
+| TV3 | **Phạm Ngọc Bách** | 2351170576 | Thành viên | Mặc định tiền VND (không số lẻ) + tiếng Việt |
+| TV4 | **Đào Ngọc Đình** | 2351170582 | Thành viên | Widget "Thống kê nhanh" chi tiêu hôm nay / tháng này |
 
 Trong code, mọi chỗ thay đổi đều được đánh dấu bằng comment `[Nhóm 10 - TVx]` để dễ tra cứu
 (`git grep "Nhóm 10"`).
@@ -61,27 +61,27 @@ Ghi chú:
 
 ## 🎨 2. Các tùy chỉnh của nhóm
 
-### TV1 – Đổi tên ứng dụng & màu chủ đạo
+### TV1 – Đổi tên ứng dụng & màu chủ đạo (Ngô Quang Tùng)
 - Tên ứng dụng **"Cashew" → "Cashew Nhóm 10"**: `lib/struct/languageMap.dart` (`globalAppName`), `lib/main.dart`,
   `web/index.html`, `web/manifest.json`, `android/.../AndroidManifest.xml`, `ios/Runner/Info.plist`.
 - Màu chủ đạo mặc định đổi từ xanh navy `#1B447A` sang **xanh ngọc `#00897B`**
   (`lib/struct/defaultPreferences.dart`), đồng bộ `theme_color` cho web (`pubspec.yaml`, `manifest.json`).
 - Tắt "màu hệ thống" mặc định để màu của nhóm luôn hiển thị (người dùng vẫn bật lại được trong Cài đặt).
 
-### TV2 – Banner chào mừng tiếng Việt
+### TV2 – Banner chào mừng tiếng Việt (Nguyễn Hải Ninh)
 - File mới `lib/pages/homePage/homePageGroupBanner.dart`: thẻ nền gradient theo màu chủ đạo, lời chào
   *"Chào mừng bạn đến với Cashew Nhóm 10!"* và **một mẹo tiết kiệm thay đổi theo ngày** (5 mẹo).
 - Có nút ✕ để ẩn; bật lại trong **Trang chủ → ⋮ → Chỉnh sửa trang chủ → "Banner chào mừng"**.
 - Đăng ký thành một mục trang chủ (`groupBanner`) trong `homePage.dart`, `editHomePage.dart`, `defaultPreferences.dart`.
 - Chuỗi hiển thị được thêm vào `assets/translations/generated/vi.json` và `en.json`.
 
-### TV3 – Mặc định VND & tiếng Việt
+### TV3 – Mặc định VND & tiếng Việt (Phạm Ngọc Bách)
 - Tiền tệ mặc định luôn là **VND (₫)** và VND được đưa lên đầu danh sách tiền phổ biến (`lib/functions.dart`).
 - Tài khoản dùng VND/JPY/KRW **không có số lẻ** (`getDefaultDecimalsForCurrency`), áp dụng cho tài khoản mặc định
   (`initializeDefaultDatabase.dart`), khi đổi tiền tệ lúc onboarding (`onBoardingPage.dart`) và khi tạo tài khoản mới (`addWalletPage.dart`).
 - Ngôn ngữ mặc định là **tiếng Việt** ngay lần mở đầu tiên (`defaultPreferences.dart` + `startLocale` trong `languageMap.dart`).
 
-### TV4 – Widget "Thống kê nhanh"
+### TV4 – Widget "Thống kê nhanh" (Đào Ngọc Đình)
 - File mới `lib/pages/homePage/homePageQuickStats.dart`: 2 ô **"Chi tiêu hôm nay"** và **"Chi tiêu tháng này"**
   tính tổng chi (mọi tài khoản) theo thời gian thực bằng `database.watchTotalWithCountOfWallet` + bộ lọc ngày.
 - Bấm vào ô để mở danh sách giao dịch chi tiêu tương ứng.
