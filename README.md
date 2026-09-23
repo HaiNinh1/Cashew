@@ -21,7 +21,7 @@ Trong code, mọi chỗ thay đổi đều được đánh dấu bằng comment 
 - [x] Cài đặt dependencies và cấu hình môi trường
 - [x] Chạy ứng dụng trên local và kiểm tra thêm / sửa / xóa chi tiêu
 - [x] Tùy chỉnh tính năng + giao diện (4 tùy chỉnh, mỗi thành viên 1 mục)
-- [x] Đóng gói sản phẩm, đẩy lên GitHub kèm ảnh chụp màn hình (`docs/screenshots/`)
+- [x] Đóng gói sản phẩm ([Tải file APK tại GitHub Releases](https://github.com/HaiNinh1/Cashew/releases/tag/v1.0.0-nhom10)), đẩy lên GitHub kèm ảnh chụp màn hình (`docs/screenshots/`)
 
 ## 🛠️ 1. Cài đặt môi trường & chạy ứng dụng
 
